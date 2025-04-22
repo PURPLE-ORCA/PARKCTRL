@@ -41,7 +41,6 @@ import StayOut from "@/Components/StayOut";
 
 const ProductCreate = () => {
     const { auth, services } = usePage().props;
-    const canManageProducts = auth?.abilities?.can_manage_products;
     const { translations } = useContext(TranslationContext);
 
     const form = useForm({
@@ -51,13 +50,6 @@ const ProductCreate = () => {
         quantity: 1,
         price: 0,
     });
-
-    // Redirect unauthorized users
-    if (!canManageProducts) {
-        return (
-            <StayOut/>
-        );
-    }
 
     const handleSubmit = (e) => {
         e.preventDefault();

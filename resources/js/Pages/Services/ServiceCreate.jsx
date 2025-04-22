@@ -4,8 +4,6 @@ import { useForm, router } from "@inertiajs/react";
 import Layout from "@/Layouts/Layout";
 import { toast } from "sonner";
 import { Icon } from "@iconify/react";
-
-// Shadcn UI components
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/Components/ui/label";
@@ -18,7 +16,6 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -30,49 +27,7 @@ import { TranslationContext } from "@/context/TranslationProvider";
 
 const ServiceCreate = () => {
     const { auth } = usePage().props;
-    const canManageServices = auth?.abilities?.can_manage_services;
     const { translations } = useContext(TranslationContext);
-
-    // Redirect unauthorized users
-    if (!canManageServices) {
-        return (
-            <Layout>
-                <Card className="max-w-md mx-auto my-20">
-                    <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
-                            <Icon
-                                icon="solar:shield-warning-broken"
-                                className="w-6 h-6 text-yellow-500"
-                            />
-                            {translations.acces_denied || "Access Denied"}
-                        </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <Alert variant="destructive">
-                            <Icon
-                                icon="solar:lock-keyhole-broken"
-                                className="h-4 w-4"
-                            />
-                            <AlertTitle>
-                                {translations.permission_error ||
-                                    "Permission Error"}
-                            </AlertTitle>
-                            <AlertDescription>
-                                {translations.no_permission ||
-                                    "You do not have permission to access this page."}
-                            </AlertDescription>
-                        </Alert>
-                        <Button className="mt-4 w-full" asChild>
-                            <Link href={route("dashboard")}>
-                                {translations.return_to_dashboard ||
-                                    "Return to Dashboard"}
-                            </Link>
-                        </Button>
-                    </CardContent>
-                </Card>
-            </Layout>
-        );
-    }
 
     const form = useForm({
         name: "",

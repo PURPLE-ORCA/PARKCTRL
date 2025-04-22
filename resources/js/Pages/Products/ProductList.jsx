@@ -23,7 +23,6 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import DataTable from "@/Components/DataTable/DataTable";
-import StayOut from "@/Components/StayOut";
 import ProductDataExport from "./ProducDataExport";
 import { TranslationContext } from "@/context/TranslationProvider";
 
@@ -32,12 +31,6 @@ const ProductList = () => {
     const { products, filters } = props;
     const { auth } = usePage().props;
     const { translations } = useContext(TranslationContext);
-
-    const canManageProducts = auth?.abilities?.can_manage_products;
-
-    if (!canManageProducts) {
-        return <StayOut />;
-    }
 
     const handleDelete = (product) => {
         router.delete(route("products.destroy", product.id));

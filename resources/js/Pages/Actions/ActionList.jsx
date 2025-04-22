@@ -2,18 +2,12 @@ import React, { act } from "react";
 import { usePage } from "@inertiajs/react";
 import Layout from "@/Layouts/Layout";
 import ActionCard from "./ActionCard";
-import StayOut from "@/Components/StayOut";
 import SearchFilterBar from "@/Components/SearchFilterBar";
 import PaginationLinks from "@/Components/PaginationLinks";
 import ActionDataExport from "./ActionDataExport";
 
 const ActionList = () => {
     const { auth, actions, filters } = usePage().props;
-    const canViewActions = auth?.abilities?.can_view_actions;
-
-    if (!canViewActions) {
-        return <StayOut />;
-    }
 
     // Define sort options based on your schema
     const sortOptions = [

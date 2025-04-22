@@ -30,20 +30,13 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { toast } from "sonner";
 import Layout from "@/Layouts/Layout";
 import { cn } from "@/lib/utils";
-import StayOut from "@/Components/StayOut";
 import { TranslationContext } from "@/context/TranslationProvider";
 
 const UsersList = () => {
     const { auth, users, roles, services, filters } = usePage().props;
-    const canManageUsers = auth?.abilities?.can_manage_users;
     const { translations } = useContext(TranslationContext);
-
-    if (!canManageUsers) {
-        return <StayOut />;
-    }
 
     const form = useForm({
         search: filters.search || "",

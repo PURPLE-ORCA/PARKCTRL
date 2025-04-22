@@ -51,18 +51,8 @@ class HandleInertiaRequests extends Middleware
         }
 
         return [
-            'is_general_manager' => Gate::forUser($user)->allows('is_general_manager'),
-            'is_magazine_manager' => Gate::forUser($user)->allows('is_magazine_manager'),
-            'is_magazine_employee' => Gate::forUser($user)->allows('is_magazine_employee'),
-            'is_it_manager' => Gate::forUser($user)->allows('is_it_manager'),
-            'is_it_employee' => Gate::forUser($user)->allows('is_it_employee'),
-            'is_magazine_staff' => Gate::forUser($user)->allows('is_magazine_staff'),
-            'is_it_staff' => Gate::forUser($user)->allows('is_it_staff'),
-            'can_manage_products' => Gate::forUser($user)->allows('can_manage_products'),
-            'can_manage_users' => Gate::forUser($user)->allows('can_manage_users'),
-            'can_manage_services' => Gate::forUser($user)->allows('can_manage_services'),
-            'can_view_actions' => Gate::forUser($user)->allows('can_view_actions'),
-            'can_view_analytics' => Gate::forUser($user)->allows('can_view_analytics'),
+            // 'is_general_manager' => Gate::forUser($user)->allows('is_general_manager'),
+            // 'is_magazine_manager' => Gate::forUser($user)->allows('is_magazine_manager'),
         ];
     }
 }
