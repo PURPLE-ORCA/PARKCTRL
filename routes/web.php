@@ -4,7 +4,6 @@ use App\Http\Controllers\ActionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HelpRequestController;
-use App\Http\Controllers\MovementController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +24,6 @@ Route::get('/', function () {
 //     return Inertia::render('Dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/dashboard/movements-analysis', [DashboardController::class, 'movementsAnalysis'])->name('dashboard.movements-analysis');
     Route::get('/dashboard/most-active-users', [DashboardController::class, 'mostActiveUsers'])->name('dashboard.most-active-users');
     Route::get('/dashboard/help-requests-insights', [DashboardController::class, 'helpRequestsInsights'])->name('dashboard.help-requests-insights');
 
@@ -73,11 +71,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/services/{service}', [ServiceController::class, 'destroy'])->name('services.destroy');
     });
 
-    Route::middleware('can:can_manage_movements')->group(function () {
-        Route::get('/movements', [MovementController::class, 'index'])->name('movements.index');
-        Route::get('/movements/create', [MovementController::class, 'create'])->name('movements.create');
-        Route::post('/movements', [MovementController::class, 'store'])->name('movements.store');
-    });
     Route::middleware('can:can_view_actions')->group(function () {
         Route::get('/actions', [ActionController::class, 'index'])->name('actions.index');
         Route::get('/actions/create', [ActionController::class, 'create'])->name('actions.create');
@@ -94,5 +87,4 @@ Route::get('help-requests/{helpRequest}', [HelpRequestController::class, 'show']
     ->name('help-requests.show');
 });
 
-Route::get('/movements/export', [MovementController::class, 'export'])->name('movements.export');
 require __DIR__.'/auth.php';

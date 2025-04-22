@@ -59,11 +59,6 @@ class User extends Authenticatable
         return $this->belongsTo(Service::class);
     }
 
-    public function Movements()
-    {
-        return $this->hasMany(Movement::class);
-    }
-
     public function actions() 
     {
         return $this->hasMany(Action::class);

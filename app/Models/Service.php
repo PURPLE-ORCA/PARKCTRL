@@ -19,22 +19,7 @@ class Service extends Model
     {
         return $this->hasMany(User::class);
     }
-
-    public function outgoingMovements()
-    {
-        return $this->hasMany(Movement::class, 'from_service_id');
-    }
-
-    public function incomingMovements()
-    {
-        return $this->hasMany(Movement::class, 'to_service_id');
-    }
     
-    public function movements()
-    {
-        return $this->outgoingMovements()->union($this->incomingMovements());
-    }
-
     public function isMagazine(): bool
     {
         return $this->type === 'magazine';

@@ -13,15 +13,15 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-$query = Product::query()->with('movements'); // Load movements instead
+        $query = Product::query(); 
 
         // Search
-        $query->when($request->search, function($q, $search) {
+        $query->when($request->search, function ($q, $search) {
             return $q->where('name', 'like', "%{$search}%")
-                    ->orWhere('supplier', 'like', "%{$search}%")
-                    ->orWhere('id', 'like', "%{$search}%")
-                    ->orWhere('price', 'like', "%{$search}%")
-                    ->orWhere('serial_number', 'like', "%{$search}%"); // Match column case
+                ->orWhere('supplier', 'like', "%{$search}%")
+                ->orWhere('id', 'like', "%{$search}%")
+                ->orWhere('price', 'like', "%{$search}%")
+                ->orWhere('serial_number', 'like', "%{$search}%");
         });
 
         // Sorting
@@ -54,10 +54,10 @@ $query = Product::query()->with('movements'); // Load movements instead
             'supplier' => 'required|string|max:150',
             'quantity' => 'required|integer|min:1',
             'price' => 'required|numeric|min:0',
-            'served_to' => 'nullable|exists:services,id', // Allow null
+            'served_to' => 'nullable|exists:services,id',
         ]);
 
-         $quantity = $request->quantity;
+        $quantity = $request->quantity;
         $initialSerial = $request->serial_number;
 
         if (!preg_match('/^(.*?)(\d+)$/', $initialSerial, $matches)) {
@@ -66,44 +66,42 @@ $query = Product::query()->with('movements'); // Load movements instead
             ]);
         }
 
-        $prefix = $matches[1];              // e.g., "MONI-"
-                $number = $matches[2];              // e.g., "001"
-                $numberLength = strlen($number);    // e.g., 3 digits
-                $startingNumber = intval($number);
+        $prefix = $matches[1];
+        $number = $matches[2];
+        $numberLength = strlen($number);
+        $startingNumber = intval($number);
 
-                try {
-                    DB::transaction(function() use ($request, $quantity, $prefix, $startingNumber, $numberLength) {
-                        for ($i = 0; $i < $quantity; $i++) {
-                            $currentNumber = $startingNumber + $i;
-                            $newSerial = $prefix . str_pad($currentNumber, $numberLength, '0', STR_PAD_LEFT);
+        try {
+            DB::transaction(function () use ($request, $quantity, $prefix, $startingNumber, $numberLength) {
+                for ($i = 0; $i < $quantity; $i++) {
+                    $currentNumber = $startingNumber + $i;
+                    $newSerial = $prefix . str_pad($currentNumber, $numberLength, '0', STR_PAD_LEFT);
 
-                            // Ensure uniqueness of the generated serial.
-                            if (Product::where('serial_number', $newSerial)->exists()) {
-                                throw new \Exception("Serial number {$newSerial} already exists.");
-                            }
+                    if (Product::where('serial_number', $newSerial)->exists()) {
+                        throw new \Exception("Serial number {$newSerial} already exists.");
+                    }
 
-                            Product::create([
-                                'name' => $request->name,
-                                'serial_number' => $newSerial,
-                                'supplier' => $request->supplier,
-                                'price' => $request->price,
-                                'served_to' => $request->served_to,
-                            ]);
-                        }
-                    });
-                } catch (\Exception $e) {
-                    return Redirect::back()->withErrors(['serial_number' => $e->getMessage()]);
+                    Product::create([
+                        'name' => $request->name,
+                        'serial_number' => $newSerial,
+                        'supplier' => $request->supplier,
+                        'price' => $request->price,
+                        'served_to' => $request->served_to,
+                    ]);
                 }
+            });
+        } catch (\Exception $e) {
+            return Redirect::back()->withErrors(['serial_number' => $e->getMessage()]);
+        }
+
         return Redirect::route('products.index')->with('success', 'Product created successfully!');
     }
+
     public function show(Product $product)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Product $product)
     {
         $services = Service::all();
@@ -117,10 +115,10 @@ $query = Product::query()->with('movements'); // Load movements instead
     {
         $request->validate([
             'name' => 'required|string|max:150',
-            'serial_number' => 'required|string|unique:products,serial_number,'.$product->id.'|max:100',
+            'serial_number' => 'required|string|unique:products,serial_number,' . $product->id . '|max:100',
             'supplier' => 'required|string|max:150',
             'price' => 'required|numeric|min:0',
-            'served_to' => 'nullable|exists:services,id', // Ensure nullable is allowed
+            'served_to' => 'nullable|exists:services,id',
         ]);
 
         $product->update($request->all());
@@ -128,9 +126,6 @@ $query = Product::query()->with('movements'); // Load movements instead
         return Redirect::route('products.index')->with('success', 'Product updated successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Product $product)
     {
         $product->delete();

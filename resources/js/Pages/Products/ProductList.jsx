@@ -75,17 +75,6 @@ const columns = [
         ),
     },
     {
-        accessorKey: "current_location",
-        header: translations.current_location || "Current Location",
-        cell: ({ row }) => (
-            <div>
-                {row.original.current_location
-                    ? row.original.current_location.name
-                    : "N/A"}
-            </div>
-        ),
-    },
-    {
         accessorKey: "actions",
         header: translations.actions || "Actions",
         cell: ({ row }) => (

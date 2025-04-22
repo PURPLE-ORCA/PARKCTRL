@@ -19,11 +19,6 @@ const QuickAccessBar = () => {
                 label={translations.create_service}
             />
             <QuickAccessLink
-                to="/movements/create"
-                icon="mdi:swap-horizontal-bold"
-                label={translations.create_movement}
-            />
-            <QuickAccessLink
                 to="/actions/create"
                 icon="mdi:play-circle-outline"
                 label={translations.action_create}

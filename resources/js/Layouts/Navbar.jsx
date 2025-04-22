@@ -53,14 +53,6 @@ const Navbar = ({pendingCount = 0}) => {
             ],
         },
         {
-            key: "movements",
-            icon: "material-symbols:swap-horiz",
-            children: [
-                { key: "all_movements", route: "movements.index" },
-                { key: "add_movement", route: "movements.create" },
-            ],
-        },
-        {
             key: "interventions",
             icon: "la:screwdriver",
             children: [
@@ -108,7 +100,7 @@ const Navbar = ({pendingCount = 0}) => {
                                 className="color: #fff"
                             />
                             <span className="ml-2 font-semibold text-xl">
-                                FSJESCTRL
+                                PARKCTRL
                             </span>
                         </Link>
                     </div>

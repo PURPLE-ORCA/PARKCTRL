@@ -185,26 +185,6 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
-        // Seed Movements Table
-        DB::table('movements')->insert([
-            [
-                'product_id' => 1, // Mop
-                'from_service_id' => 1, // Cleaning Service
-                'to_service_id' => 3, // Maintenance Service
-                'movement_date' => now(),
-                'user_id' => 1, // Admin User
-                'note' => 'Moved 10 mops to Maintenance Service',
-            ],
-            [
-                'product_id' => 2, // Broom
-                'from_service_id' => 1, // Cleaning Service
-                'to_service_id' => 3, // Maintenance Service
-                'movement_date' => now(),
-                'user_id' => 2, // Editor User
-                'note' => 'Moved 5 brooms to Maintenance Service',
-            ],
-        ]);
-
         // Seed Actions Table
         DB::table('actions')->insert([
             [
