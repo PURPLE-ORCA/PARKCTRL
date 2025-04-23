@@ -10,13 +10,6 @@ import { Label } from "@/Components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
-import {
     Breadcrumb,
     BreadcrumbItem,
     BreadcrumbLink,
@@ -32,7 +25,6 @@ const ServiceCreate = () => {
     const form = useForm({
         name: "",
         description: "",
-        type: "magazine", // Default type
     });
 
     const handleSubmit = (e) => {
@@ -165,63 +157,6 @@ const ServiceCreate = () => {
                                             className="h-4 w-4"
                                         />
                                         {form.errors.description}
-                                    </p>
-                                )}
-                            </div>
-
-                            <div className="space-y-2">
-                                <Label htmlFor="type" className="text-base">
-                                    {translations.service_type ||
-                                        "Service Type"}
-                                </Label>
-                                <Select
-                                    value={form.data.type}
-                                    onValueChange={(value) =>
-                                        form.setData("type", value)
-                                    }
-                                >
-                                    <SelectTrigger id="type" className="w-full">
-                                        <SelectValue
-                                            placeholder={
-                                                translations.select_a_type ||
-                                                "Select a type"
-                                            }
-                                        />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="magazine">
-                                            <div className="flex items-center gap-2">
-                                                <Icon
-                                                    icon="solar:book-broken"
-                                                    className="h-4 w-4"
-                                                />
-                                                <span>
-                                                    {translations.magazine ||
-                                                        "Magazine"}
-                                                </span>
-                                            </div>
-                                        </SelectItem>
-                                        <SelectItem value="service">
-                                            <div className="flex items-center gap-2">
-                                                <Icon
-                                                    icon="solar:widget-broken"
-                                                    className="h-4 w-4"
-                                                />
-                                                <span>
-                                                    {translations.service ||
-                                                        "Service"}
-                                                </span>
-                                            </div>
-                                        </SelectItem>
-                                    </SelectContent>
-                                </Select>
-                                {form.errors.type && (
-                                    <p className="text-red-500 text-sm flex items-center gap-1 mt-1">
-                                        <Icon
-                                            icon="solar:danger-triangle-broken"
-                                            className="h-4 w-4"
-                                        />
-                                        {form.errors.type}
                                     </p>
                                 )}
                             </div>

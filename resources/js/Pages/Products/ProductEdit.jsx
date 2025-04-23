@@ -3,22 +3,12 @@ import { usePage, Link, useForm, router } from "@inertiajs/react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
 import Layout from "@/Layouts/Layout";
-import { toast } from "sonner";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { TranslationContext } from "@/context/TranslationProvider";
-import StayOut from "@/Components/StayOut";
 
 const ProductEdit = () => {
-    const { auth, product, services } = usePage().props;
-    const canManageProducts = auth?.abilities?.can_manage_products;
+    const { product } = usePage().props;
 
     const { translations } = useContext(TranslationContext);
 
@@ -28,12 +18,6 @@ const ProductEdit = () => {
         supplier: product.supplier,
         price: product.price,
     });
-
-    if (!canManageProducts) {
-        return (
-            <StayOut/>
-        );
-    }
 
     const handleSubmit = (e) => {
         e.preventDefault();

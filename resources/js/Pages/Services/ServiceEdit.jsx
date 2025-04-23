@@ -5,33 +5,15 @@ import { Link, useForm, router } from "@inertiajs/react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Layout from "@/Layouts/Layout";
-import { toast } from "sonner";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Label } from "@/Components/ui/label";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
-import StayOut from "@/Components/StayOut";
 
 const ServiceEdit = () => {
     const { auth, service } = usePage().props;
-    const canManageServices = auth?.abilities?.can_manage_services;
-    const { translations } = useContext(TranslationContext);
-
-    if (!canManageServices) {
-        return (
-            <StayOut/>
-        );
-    }
+const { translations } = useContext(TranslationContext);
 
     const form = useForm({
         name: service.name,
         description: service.description,
-        type: service.type,
     });
 
     // In ServiceEdit.jsx
@@ -91,44 +73,6 @@ const ServiceEdit = () => {
                         {form.errors.description && (
                             <p className="text-red-500 text-sm">
                                 {form.errors.description}
-                            </p>
-                        )}
-                    </div>
-
-                    {/* Type */}
-                    <div>
-                        <Label
-                            htmlFor="type"
-                            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                        >
-                            {translations.type || "Type"}
-                        </Label>
-                        <Select
-                            id="type"
-                            value={form.data.type}
-                            onChange={(value) => form.setData("type", value)}
-                            className="w-full p-2 border rounded-md"
-                        >
-                            <SelectTrigger className="mt-1 w-full">
-                                <SelectValue
-                                    placeholder={
-                                        translations.select_a_type ||
-                                        "Select a type"
-                                    }
-                                />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="magazine">
-                                    {translations.magazine || "Magazine"}
-                                </SelectItem>
-                                <SelectItem value="service">
-                                    {translations.service || "Service"}
-                                </SelectItem>
-                            </SelectContent>
-                        </Select>
-                        {form.errors.type && (
-                            <p className="text-red-500 text-sm">
-                                {form.errors.type}
                             </p>
                         )}
                     </div>

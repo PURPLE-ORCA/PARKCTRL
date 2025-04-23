@@ -38,13 +38,11 @@ class ServiceController extends Controller
         $request->validate([
             'name' => 'required|string|max:255|unique:services',
             'description' => 'required|string|max:255',
-            'type' => 'required|string|in:magazine,service',
         ]);
 
         Service::create([
             'name' => $request->name,
             'description' => $request->description,
-            'type' => $request->type,
         ]);
 
         return Redirect::route('services.index')->with('success', 'Service created successfully!');
@@ -62,13 +60,11 @@ class ServiceController extends Controller
         $request->validate([
             'name' => 'required|string|max:255|unique:services,name,' . $service->id,
             'description' => 'nullable|string',
-            'type' => 'required|string|in:magazine,service',
         ]);
 
         $service->update([
             'name' => $request->name,
             'description' => $request->description,
-            'type' => $request->type,
         ]);
 
         return Redirect::route('services.index')->with('success', 'Service updated successfully!');

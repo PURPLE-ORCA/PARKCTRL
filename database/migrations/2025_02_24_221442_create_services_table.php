@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name', 100)->unique();
             $table->text('description')->nullable();
-            $table->enum('type', ['magazine', 'service']);
             $table->timestamps();
         });
     }

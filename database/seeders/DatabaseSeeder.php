@@ -29,12 +29,28 @@ class DatabaseSeeder extends Seeder
 
         // Seed Services Table
         DB::table('services')->insert([
-            ['name' => 'Cleaning Service', 'description' => 'Professional cleaning services', 'type' => 'service'],
-            ['name' => 'IT service', 'description' => 'Professional techniciens services', 'type' => 'service'],
-            ['name' => 'Magazine A', 'description' => 'Magazine A services', 'type' => 'magazine'],
-            ['name' => 'Maintenance Service', 'description' => 'Building maintenance services', 'type' => 'service'],
-            ['name' => 'Administration service', 'description' => 'Administrative affairs service', 'type' => 'service'],
-            ['name' => 'HR service', 'description' => 'Human resources service', 'type' => 'service'],
+            ['name' => 'Service d\'administration', 'description' => 'service professionnel d\'administration'],
+            ['name' => 'Service de nettoyage', 'description' => 'service professionnel de nettoyage'],
+            ['name' => 'Service de maintenance', 'description' => 'service professionnel de maintenance'],
+            ['name' => 'Service de sécurité', 'description' => 'service professionnel de sécurité'],
+            ['name' => 'Service de livraison', 'description' => 'service professionnel de livraison'],
+            ['name' => 'Service d\'assistance technique', 'description' => 'service professionnel d\'assistance technique'],
+            ['name' => 'Service de gestion des stocks', 'description' => 'service professionnel de gestion des stocks'],
+            ['name' => 'Service de vente', 'description' => 'service professionnel de vente'],
+            ['name' => 'Service de marketing', 'description' => 'service professionnel de marketing'],
+            ['name' => 'Service de comptabilité', 'description' => 'service professionnel de comptabilité'],
+            ['name' => 'Service juridique', 'description' => 'service professionnel juridique'],
+            ['name' => 'Service de ressources humaines', 'description' => 'service professionnel de ressources humaines'],
+            ['name' => 'Service informatique', 'description' => 'service professionnel informatique'],
+            ['name' => 'Service de communication', 'description' => 'service professionnel de communication'],
+            ['name' => 'Service d\'événementiel', 'description' => 'service professionnel d\'événementiel'],
+            ['name' => 'Service de design graphique', 'description' => 'service professionnel de design graphique'],
+            ['name' => 'Service de photographie', 'description' => 'service professionnel de photographie'],
+            ['name' => 'Service de vidéographie', 'description' => 'service professionnel de vidéographie'],
+            ['name' => 'Service de traduction', 'description' => 'service professionnel de traduction'],
+            ['name' => 'Service de rédaction', 'description' => 'service professionnel de rédaction'],
+            ['name' => 'Service d\'édition', 'description' => 'service professionnel d\'édition'],
+            ['name' => 'Service de relations publiques', 'description' => 'service professionnel de relations publiques'],
         ]);
 
         // Seed Users Table
@@ -44,7 +60,7 @@ class DatabaseSeeder extends Seeder
                 'email' => 'admin@ctrl.com',
                 'password' => Hash::make('password'),
                 'role_id' => 1, // admin role
-                'service_id' => null,
+                'service_id' => 1,
             ],
             [
                 'name' => 'user 1',
@@ -54,25 +70,102 @@ class DatabaseSeeder extends Seeder
                 'service_id' => 3, 
             ],
             [
+                'name' => 'user 199',
+                'email' => 'user199@ctrl.com',
+                'password' => Hash::make('password'),
+                'role_id' => 2, 
+                'service_id' => 3, 
+            ],
+            [
+                'name' => 'user 47',
+                'email' => 'user47@ctrl.com',
+                'password' => Hash::make('password'),
+                'role_id' => 2, 
+                'service_id' => 3, 
+            ],
+            [
+                'name' => 'user 265',
+                'email' => 'user265@ctrl.com',
+                'password' => Hash::make('password'),
+                'role_id' => 2, 
+                'service_id' => 3, 
+            ],
+            [
+                'name' => 'user 904',
+                'email' => 'user904@ctrl.com',
+                'password' => Hash::make('password'),
+                'role_id' => 2, 
+                'service_id' => 3, 
+            ],
+            [
                 'name' => 'user 2',
                 'email' => 'user2@ctrl.com',
                 'password' => Hash::make('password'),
                 'role_id' => 2, // user role
-                'service_id' => 2, // Magazine A
+                'service_id' => 2,
+            ],
+            [
+                'name' => 'user 23',
+                'email' => 'user23@ctrl.com',
+                'password' => Hash::make('password'),
+                'role_id' => 2, // user role
+                'service_id' => 2,
+            ],
+            [
+                'name' => 'user 56',
+                'email' => 'user56@ctrl.com',
+                'password' => Hash::make('password'),
+                'role_id' => 2, // user role
+                'service_id' => 2,
             ],
             [
                 'name' => 'user 3',
                 'email' => 'user3@ctrl.com',
                 'password' => Hash::make('password'),
                 'role_id' => 2, // user role
-                'service_id' => 2, // Magazine A
+                'service_id' => 5,
             ],
             [
                 'name' => 'user 4',
                 'email' => 'user5@ctrl.com',
                 'password' => Hash::make('password'),
                 'role_id' => 2, // user role
-                'service_id' => 2, // Magazine A
+                'service_id' => 7,
+            ],
+            [
+                'name' => 'user 5',
+                'email' => 'user6@ctrl.com',
+                'password' => Hash::make('password'),
+                'role_id' => 2, // user role
+                'service_id' => 8, 
+            ],
+            [
+                'name' => 'user 6',
+                'email' => 'user7@ctrl.com',
+                'password' => Hash::make('password'),
+                'role_id' => 2, // user role
+                'service_id' => 9,
+            ],
+            [
+                'name' => 'user 7',
+                'email' => 'user8@ctrl.com',
+                'password' => Hash::make('password'),
+                'role_id' => 2, // user role
+                'service_id' => 10,
+            ],
+            [
+                'name' => 'user 8',
+                'email' => 'user9@ctrl.com',
+                'password' => Hash::make('password'),
+                'role_id' => 2, // user role
+                'service_id' => 11,
+            ],
+            [
+                'name' => 'user 9',
+                'email' => 'user10@ctrl.com',
+                'password' => Hash::make('password'),
+                'role_id' => 2, // user role
+                'service_id' => 12,
             ],
         ]);
 
