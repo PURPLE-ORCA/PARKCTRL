@@ -22,6 +22,14 @@ class Product extends Model
     {
         return $this->hasMany(Action::class);
     }
+    public function actions()
+    {
+        return $this->hasMany(Action::class);
+    }
+    public function helpRequests()
+    {
+        return $this->hasMany(HelpRequest::class);
+    }
     public function service()
     {
         return $this->belongsTo(Service::class, 'served_to');

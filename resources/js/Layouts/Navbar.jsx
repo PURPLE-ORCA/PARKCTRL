@@ -235,7 +235,9 @@ const Navbar = ({ pendingCount = 0 }) => {
                             </DropdownMenu>
                         </div>
 
-                        <NotificationBadge initialCount={pendingCount} />
+                        {is_admin && (
+                            <NotificationBadge initialCount={pendingCount} />
+                        )}
 
                         {/* User Menu (Desktop) */}
                         <div className="hidden md:flex">

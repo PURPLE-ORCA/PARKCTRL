@@ -64,21 +64,6 @@ export default function NotificationBadge({ initialCount = 0 }) {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-72">
                 <div className="p-2">
-                    <div className="flex justify-between items-center mb-2 px-2 py-1">
-                        <h3 className="text-sm font-medium">Notifications</h3>
-                        {count > 0 && (
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={handleMarkAllAsRead}
-                                className="text-xs h-7 px-2 text-blue-600 hover:text-blue-800 hover:bg-blue-50"
-                            >
-                                <CheckCircle className="mr-1 h-3 w-3" />
-                                Mark all as read
-                            </Button>
-                        )}
-                    </div>
-                    <Separator className="my-1" />
                     <div className="space-y-1 mt-3 px-2">
                         {count > 0 ? (
                             <div className="flex items-center text-sm text-amber-600 bg-amber-50 p-2 rounded-md">
