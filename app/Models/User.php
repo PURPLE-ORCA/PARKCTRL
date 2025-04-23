@@ -58,19 +58,24 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Service::class);
     }
-
+    public function service_id() {
+        return $this->belongsTo(Service::class, 'service_id');
+    }
     public function actions() 
     {
         return $this->hasMany(Action::class);
     }
-
     public function customNotifications()
     {
         return $this->hasMany(Notification::class);
     }
     
-public function hasRole($roleName)
-{
-    return $this->role?->name === $roleName;
-}
+    public function hasRole($roleName)
+    {
+        return $this->role?->name === $roleName;
+    }
+    public function isAdmin()
+    {
+        return $this->role?->name === 'administrator';
+    }
 }

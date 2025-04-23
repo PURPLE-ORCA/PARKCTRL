@@ -42,7 +42,8 @@ import StayOut from "@/Components/StayOut";
 const ProductCreate = () => {
     const { auth, services } = usePage().props;
     const { translations } = useContext(TranslationContext);
-
+    const is_admin = auth?.abilities?.is_admin;
+    
     const form = useForm({
         name: "",
         serial_number: "",

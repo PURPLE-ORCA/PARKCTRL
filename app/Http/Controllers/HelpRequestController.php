@@ -53,8 +53,14 @@ class HelpRequestController extends Controller
     }
     public function create()
     {
-        $products = Product::all();
-        
+        $user = Auth::user();
+
+        $products = Product::where('served_to', $user->service_id)->get();
+
+    //  $products = Auth::user()->role->name === 'administrator'
+    // ? Product::all()
+    // : Product::where('served_to', Auth::user()->service_id)->get();
+
         return Inertia::render('HelpRequests/Create', [
             'products' => $products
         ]);

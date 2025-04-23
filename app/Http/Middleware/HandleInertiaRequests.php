@@ -52,7 +52,7 @@ class HandleInertiaRequests extends Middleware
 
         return [
             'is_admin' => Gate::forUser($user)->allows('is_admin'),
-            'is_empl' => Gate::forUser($user)->allows('is_empl'),
+            'is_employee' => Gate::forUser($user)->allows('is_employee'),
         ];
     }
 }

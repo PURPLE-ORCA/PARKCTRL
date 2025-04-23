@@ -1,12 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link, usePage } from "@inertiajs/react";
 import { Icon } from "@iconify/react";
-import {
-    Menu,
-    ChevronDown,
-    LogOut,
-    Settings,
-} from "lucide-react";
+import { Menu, ChevronDown, LogOut, Settings } from "lucide-react";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -21,53 +16,73 @@ import ThemeToggler from "@/Components/ThemeToggler";
 import NotificationBadge from "@/Components/NotificationBadge";
 import { TranslationContext } from "@/context/TranslationProvider";
 
-const Navbar = ({pendingCount = 0}) => {
+const Navbar = ({ pendingCount = 0 }) => {
     const { auth } = usePage().props;
     const user = auth.user;
     const is_admin = auth?.abilities?.is_admin;
+    const is_employee = auth?.abilities?.is_employee;
 
-const mainNavItems = [
-    {
-        key: "dashboard",
-        icon: "material-symbols:dashboard",
-        route: "dashboard",
-    },
-    ...(is_admin
-        ? [
-            {
-                key: "users",
-                icon: "material-symbols:person",
-                route: "users.index",
-            },
-            {
-                key: "services",
-                icon: "material-symbols:home-repair-service",
-                children: [
-                    { key: "all_services", route: "services.index" },
-                    { key: "add_service", route: "services.create" },
-                ],
-            },
-        ]
-        : []),
-    {
-        key: "products",
-        icon: "material-symbols:inventory-2",
-        children: [
-            { key: "all_products", route: "products.index" },
-            { key: "add_product", route: "products.create" },
-        ],
-    },
-    {
-        key: "interventions",
-        icon: "la:screwdriver",
-        children: [
-            { key: "all_help_requests", route: "help-requests.index" },
-            { key: "actions_history", route: "actions.index" },
-            { key: "request_help", route: "help-requests.create" },
-        ],
-    },
-];
-
+    const mainNavItems = [
+        {
+            key: "dashboard",
+            icon: "material-symbols:dashboard",
+            route: "dashboard",
+        },
+        ...(is_admin
+            ? [
+                  {
+                      key: "users",
+                      icon: "material-symbols:person",
+                      route: "users.index",
+                  },
+                  {
+                      key: "services",
+                      icon: "material-symbols:home-repair-service",
+                      children: [
+                          { key: "all_services", route: "services.index" },
+                          { key: "add_service", route: "services.create" },
+                      ],
+                  },
+                  {
+                      key: "products",
+                      icon: "material-symbols:inventory-2",
+                      children: [
+                          { key: "all_products", route: "products.index" },
+                          { key: "add_product", route: "products.create" },
+                      ],
+                  },
+                  {
+                      key: "interventions",
+                      icon: "la:screwdriver",
+                      children: [
+                          {
+                              key: "all_help_requests",
+                              route: "help-requests.index",
+                          },
+                          { key: "actions_history", route: "actions.index" },
+                          {
+                              key: "request_help",
+                              route: "help-requests.create",
+                          },
+                      ],
+                  },
+              ]
+            : []),
+        ...(is_employee
+            ? [
+                  {
+                      key: "products",
+                      icon: "material-symbols:inventory-2",
+                      route: "products.index",
+                  },
+                  {
+                      key: "request_help",
+                      icon: "la:screwdriver",
+                      route: "help-requests.create",
+                  },
+              ]
+            : []),
+    ];
 
     const getInitials = (name) => {
         return name
@@ -78,7 +93,7 @@ const mainNavItems = [
     };
 
     const { translations, switchLanguage } = useContext(TranslationContext);
-    const lang = localStorage.getItem("lang") || "fr"; 
+    const lang = localStorage.getItem("lang") || "fr";
     const locals = [
         {
             locale: "fr",
@@ -96,7 +111,6 @@ const mainNavItems = [
         <nav className="border-b bg-background">
             <div className="mx-auto px-4 md:px-6">
                 <div className="flex h-16 items-center justify-between">
-
                     <div className="flex items-center">
                         <Link href="/" className="flex items-center">
                             <Icon

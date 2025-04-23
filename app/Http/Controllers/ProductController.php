@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -13,15 +14,24 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Product::query(); 
+        $user = auth::user();
+
+        $query = Product::query();
+
+        // Only apply service-based filtering if the user is NOT an admin
+        if (!$user->isAdmin()) {
+            $query->where('served_to', $user->service_id);
+        }
 
         // Search
         $query->when($request->search, function ($q, $search) {
-            return $q->where('name', 'like', "%{$search}%")
-                ->orWhere('supplier', 'like', "%{$search}%")
-                ->orWhere('id', 'like', "%{$search}%")
-                ->orWhere('price', 'like', "%{$search}%")
-                ->orWhere('serial_number', 'like', "%{$search}%");
+            $q->where(function ($subQuery) use ($search) {
+                $subQuery->where('name', 'like', "%{$search}%")
+                    ->orWhere('supplier', 'like', "%{$search}%")
+                    ->orWhere('id', 'like', "%{$search}%")
+                    ->orWhere('price', 'like', "%{$search}%")
+                    ->orWhere('serial_number', 'like', "%{$search}%");
+            });
         });
 
         // Sorting
