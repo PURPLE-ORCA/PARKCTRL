@@ -103,15 +103,15 @@ const ProductDataExport = ({ data }) => {
                 headStyles: { fillColor: [70, 70, 70] },
             });
 
-            // Footer branding
-            doc.setFontSize(10);
-            doc.setTextColor(100);
-            doc.text(
-                "Designed and developed by EL MOUSSAOUI MOHAMMED",
-                pageWidth / 2,
-                pageHeight - 10,
-                { align: "center" }
-            );
+            // // Footer branding
+            // doc.setFontSize(10);
+            // doc.setTextColor(100);
+            // doc.text(
+            //     "",
+            //     pageWidth / 2,
+            //     pageHeight - 10,
+            //     { align: "center" }
+            // );
 
             // Save the PDF
             doc.save("products.pdf");

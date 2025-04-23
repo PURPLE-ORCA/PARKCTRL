@@ -165,5 +165,19 @@
     "view_details": "عرض التفاصيل",
     "respond": "الرد",
     "showing_of_tickets": "عرض {shown} من {total} تذكرة",
-    "view_all_tickets": "عرض جميع التذاكر"
-}
+    "view_all_tickets": "عرض جميع التذاكر",
+    "create_help_request": "إنشاء طلب مساعدة",
+    "new_help_request": "طلب مساعدة جديد",
+    "fill_details_for_help_request": "يرجى ملء التفاصيل أدناه لتقديم طلب مساعدة جديد",
+    "describe_issue_placeholder": "يرجى وصف مشكلتك بالتفصيل...",
+    "include_relevant_details_help": "يرجى تضمين أي تفاصيل ذات صلة قد تساعدنا في حل مشكلتك.",
+    "submit_request": "إرسال الطلب",
+    "submitting": "جارٍ الإرسال...",
+    "actions_list_title": "قائمة الإجراءات",
+    "sort_date_created": "تاريخ الإنشاء",
+    "sort_action_type": "نوع الإجراء",
+    "sort_date_updated": "تاريخ التحديث",
+    "search_action_details_placeholder": "ابحث بالإجراء أو التفاصيل...",
+    "no_actions_found": "لم يتم العثور على إجراءات. حاول تعديل البحث أو عوامل التصفية.",
+    "not_selected": "لم يتم الاختيار",
+    "empty_parentheses": "(فارغ)"}
