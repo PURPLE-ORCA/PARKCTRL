@@ -24,44 +24,50 @@ import { TranslationContext } from "@/context/TranslationProvider";
 const Navbar = ({pendingCount = 0}) => {
     const { auth } = usePage().props;
     const user = auth.user;
+    const is_admin = auth?.abilities?.is_admin;
 
-    const mainNavItems = [
-        {
-            key: "dashboard",
-            icon: "material-symbols:dashboard",
-            route: "dashboard",
-        },
-        {
-            key: "users",
-            icon: "material-symbols:person",
-            route: "users.index",
-        },
-        {
-            key: "services",
-            icon: "material-symbols:home-repair-service",
-            children: [
-                { key: "all_services", route: "services.index" },
-                { key: "add_service", route: "services.create" },
-            ],
-        },
-        {
-            key: "products",
-            icon: "material-symbols:inventory-2",
-            children: [
-                { key: "all_products", route: "products.index" },
-                { key: "add_product", route: "products.create" },
-            ],
-        },
-        {
-            key: "interventions",
-            icon: "la:screwdriver",
-            children: [
-                { key: "all_help_requests", route: "help-requests.index" },
-                { key: "actions_history", route: "actions.index" },
-                { key: "request_help", route: "help-requests.create" },
-            ],
-        },
-    ];
+const mainNavItems = [
+    {
+        key: "dashboard",
+        icon: "material-symbols:dashboard",
+        route: "dashboard",
+    },
+    ...(is_admin
+        ? [
+            {
+                key: "users",
+                icon: "material-symbols:person",
+                route: "users.index",
+            },
+            {
+                key: "services",
+                icon: "material-symbols:home-repair-service",
+                children: [
+                    { key: "all_services", route: "services.index" },
+                    { key: "add_service", route: "services.create" },
+                ],
+            },
+        ]
+        : []),
+    {
+        key: "products",
+        icon: "material-symbols:inventory-2",
+        children: [
+            { key: "all_products", route: "products.index" },
+            { key: "add_product", route: "products.create" },
+        ],
+    },
+    {
+        key: "interventions",
+        icon: "la:screwdriver",
+        children: [
+            { key: "all_help_requests", route: "help-requests.index" },
+            { key: "actions_history", route: "actions.index" },
+            { key: "request_help", route: "help-requests.create" },
+        ],
+    },
+];
+
 
     const getInitials = (name) => {
         return name

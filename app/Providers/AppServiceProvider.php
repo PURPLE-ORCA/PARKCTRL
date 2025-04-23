@@ -24,12 +24,11 @@ class AppServiceProvider extends ServiceProvider
     {
         Vite::prefetch(concurrency: 3);
 
-        // Gate::define('is_general_manager', function ($user) {
-        //     return $user->hasRole('general_manager');
-        // });
-        // Gate::define('is_magazine_manager', function ($user) {
-        //     return $user->hasRole('magazine_manager');
-        // });
-
+        Gate::define('is_admin', function ($user) {
+            return $user->hasRole('administrator');
+        });
+        Gate::define('is_employee', function ($user) {
+            return $user->hasRole('employee');
+        });
     }
 }

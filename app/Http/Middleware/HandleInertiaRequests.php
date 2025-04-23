@@ -51,8 +51,8 @@ class HandleInertiaRequests extends Middleware
         }
 
         return [
-            // 'is_general_manager' => Gate::forUser($user)->allows('is_general_manager'),
-            // 'is_magazine_manager' => Gate::forUser($user)->allows('is_magazine_manager'),
+            'is_admin' => Gate::forUser($user)->allows('is_admin'),
+            'is_empl' => Gate::forUser($user)->allows('is_empl'),
         ];
     }
 }

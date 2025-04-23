@@ -6,10 +6,17 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Layout from "@/Layouts/Layout";
 import { Label } from "@/Components/ui/label";
+import StayOut from "@/Components/StayOut";
 
 const ServiceEdit = () => {
     const { auth, service } = usePage().props;
-const { translations } = useContext(TranslationContext);
+    const { translations } = useContext(TranslationContext);
+    const is_admin = auth?.abilities?.is_admin;
+
+        if (!is_admin) {
+            return <StayOut />;
+        }
+
 
     const form = useForm({
         name: service.name,

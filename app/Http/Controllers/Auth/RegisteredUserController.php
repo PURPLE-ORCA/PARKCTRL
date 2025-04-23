@@ -10,6 +10,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rules;
@@ -21,6 +22,9 @@ class RegisteredUserController extends Controller
 
     public function index(Request $request)
     {
+        if (!Gate::allows('is_admin')) {
+            abort(403, 'Administratreur seulement');
+        }
         $query = User::query()->with(['role', 'service']);
 
         // Search by name or email
@@ -40,8 +44,8 @@ class RegisteredUserController extends Controller
 
         return Inertia::render('Users/UsersList', [
             'users' => $users,
-            'roles' => Role::all(), // For role assignment dropdown
-            'services' => Service::all(), // For service assignment dropdown
+            'roles' => Role::all(),
+            'services' => Service::all(),
             'filters' => $request->only(['search', 'sort_by', 'sort_order']),
         ]);
     }
@@ -51,7 +55,7 @@ class RegisteredUserController extends Controller
     public function create(): Response
     {
         return Inertia::render('Auth/Register', [
-            'services' => Service::all(), // Pass services to the form
+            'services' => Service::all(), 
         ]);    
 }
 

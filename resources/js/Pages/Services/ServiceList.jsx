@@ -18,11 +18,17 @@ import {
 import { MaterialSymbolsEdit } from "@/Components/MaterialSymbolsEdit";
 import { MingcuteDeleteFill } from "@/Components/MingcuteDeleteFill";
 import DataTable from "@/Components/DataTable/DataTable";
+import StayOut from "@/Components/StayOut";
 
 const ServiceList = () => {
     const { auth, services, filters } = usePage().props;
-
     const { translations } = useContext(TranslationContext);
+    const is_admin = auth?.abilities?.is_admin;
+
+        if (!is_admin) {
+            return <StayOut />;
+        }
+
 
     const handleDelete = (service) => {
         router.delete(route("services.destroy", service.id));

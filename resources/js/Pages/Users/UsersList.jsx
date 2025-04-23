@@ -33,10 +33,16 @@ import {
 import Layout from "@/Layouts/Layout";
 import { cn } from "@/lib/utils";
 import { TranslationContext } from "@/context/TranslationProvider";
+import StayOut from "@/Components/StayOut";
 
 const UsersList = () => {
     const { auth, users, roles, services, filters } = usePage().props;
     const { translations } = useContext(TranslationContext);
+    const is_admin = auth?.abilities?.is_admin;
+
+        if (!is_admin) {
+            return <StayOut />;
+        }
 
     const form = useForm({
         search: filters.search || "",
