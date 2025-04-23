@@ -15,11 +15,15 @@ class Product extends Model
         'serial_number',
         'supplier',
         'price',
+        'served_to',
     ];
 
     public function actionLogs()
     {
         return $this->hasMany(Action::class);
     }
-
+    public function service()
+    {
+        return $this->belongsTo(Service::class, 'served_to');
+    }
 }

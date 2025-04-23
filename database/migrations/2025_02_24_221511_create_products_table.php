@@ -14,6 +14,8 @@ return new class extends Migration
             $table->string('serial_number', 100)->unique();
             $table->string('supplier', 150);
             $table->decimal('price', 10, 2);
+            $table->unsignedBigInteger('served_to')->nullable();
+            $table->foreign('served_to')->references('id')->on('services')->onDelete('set null');
             $table->timestamps();
         });
     }

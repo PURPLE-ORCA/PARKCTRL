@@ -57,6 +57,11 @@ const columns = [
     },
     { accessorKey: "supplier", header: translations.supplier || "Supplier" },
     {
+        accessorKey: "service.name", 
+        header: translations.service || "Service",
+        cell: ({ row }) => row.original.service?.name || "—", 
+    },
+    {
         accessorKey: "price",
         header: translations.price || "Price",
         cell: ({ row }) => (
