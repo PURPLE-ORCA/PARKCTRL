@@ -96,13 +96,11 @@
     "missing_assignment": "تعيين مفقود",
     "need_assignment": "يجب أن تكون معينًا إلى خدمة لإنشاء الحركات",
     "product_not_found": "المنتج غير موجود",
-    "move_products_between_services": "نقل المنتجات بين الخدمات",
     "product": "المنتج",
     "select_a_product": "اختر منتجاً",
     "available": "متاح",
     "destination_service": "الخدمة الوجهة",
     "select_destination_service": "اختر الخدمة الوجهة",
-    "items_to_move": "عدد العناصر المراد نقلها",
     "note": "ملاحظة",
     "add_note_optional": "أضف ملاحظة (اختياري)",
     "export_pdf": "تصدير PDF",
@@ -159,7 +157,6 @@
     "top_suppliers": "أهم الموردين",
     "products_by_supplier_breakdown": "تفصيل المنتجات حسب المورد",
     "activity_log": "سجل النشاط",
-    "recent_inventory_movements": "حركات المخزون الأخيرة",
     "load_more_activities": "تحميل المزيد من الأنشطة",
     "current_product_support_tickets": "تذاكر دعم المنتج الحالية",
     "view_details": "عرض التفاصيل",
@@ -197,7 +194,9 @@
     "sort_descending": "تنازلي",
     "apply_filters_button": "تطبيق الفلاتر",
     "pending_help_request_singular": "لديك طلب مساعدة جديد واحد ({count}) معلق.",
-    "pending_help_requests_plural": "لديك {count} طلبات مساعدة جديدة معلقة.", 
+    "pending_help_requests_plural": "لديك {count} طلبات مساعدة جديدة معلقة.",
     "no_new_notifications": "لا توجد إشعارات جديدة.",
-    "view_all_help_requests": "عرض كل طلبات المساعدة"
+    "view_all_help_requests": "عرض كل طلبات المساعدة",
+    "pending_role_assignment_title": "تنشيط الحساب معلق",
+    "pending_role_assignment_message": "حسابك في انتظار تحديد دور له من قبل المسؤول. يرجى المحاولة مرة أخرى لاحقًا."
 }

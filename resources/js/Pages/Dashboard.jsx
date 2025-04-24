@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Package, Users, AlertTriangle, DollarSign } from "lucide-react";
+import { Package, Users, AlertTriangle, DollarSign, Info } from "lucide-react";
 import {
     BarChart,
     Bar,
@@ -49,13 +49,12 @@ export default function Dashboard({
     const totalProducts = stats?.totalProducts || 0;
     const totalValue = stats?.totalValue || 0;
     const pendingHelpRequests = stats?.pendingHelpRequests || 0;
-    const unreadNotifications = stats?.unreadNotifications || 0; 
-
+    const userHasRole = auth?.user?.role;
     const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8"];
 
     const getStatusTranslation = (status) => {
-        const key = status?.toLowerCase().replace(" ", "_"); 
-        return translations[key] || status?.replace("_", " ") || ""; 
+        const key = status?.toLowerCase().replace(" ", "_");
+        return translations[key] || status?.replace("_", " ") || "";
     };
 
     const formatShowingTicketsText = () => {
@@ -66,6 +65,26 @@ export default function Dashboard({
             .replace("{shown}", helpRequests?.length || 0)
             .replace("{total}", stats?.totalHelpRequests || 0);
     };
+
+    if (!userHasRole) {
+        return (
+            <Layout>
+                <div className="p-6 flex justify-center items-center min-h-[calc(100vh-theme(space.24))]">
+                    <Alert variant="default" className="max-w-lg">
+                        <Info className="h-4 w-4" /> 
+                        <AlertTitle>
+                            {translations.pending_role_assignment_title ||
+                                "Account Pending Activation"}
+                        </AlertTitle>
+                        <AlertDescription>
+                            {translations.pending_role_assignment_message ||
+                                "Your account is awaiting role assignment by an administrator. Please check back later."}
+                        </AlertDescription>
+                    </Alert>
+                </div>
+            </Layout>
+        );
+    }
 
     return (
         <Layout>
@@ -204,7 +223,7 @@ export default function Dashboard({
                                         >
                                             <PieChart>
                                                 <Pie
-                                                    data={topServices || []} 
+                                                    data={topServices || []}
                                                     dataKey="count"
                                                     nameKey="name"
                                                     cx="50%"
