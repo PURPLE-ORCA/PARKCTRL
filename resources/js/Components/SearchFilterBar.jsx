@@ -1,6 +1,6 @@
-// SearchFilterBar.jsx - Reusable component for search and filtering
-import React from "react";
+import React, { useContext } from "react"; 
 import { useForm } from "@inertiajs/react";
+import { TranslationContext } from "@/context/TranslationProvider";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,13 +21,15 @@ import { ChevronDown, SortAsc, SortDesc, Search, Filter } from "lucide-react";
 const SearchFilterBar = ({
     routeName,
     initialFilters = {},
-    searchPlaceholder = "Search...",
-    sortOptions = [],
-    filterOptions = [],
+    searchPlaceholder = "Search...", 
+    sortOptions = [], 
+    filterOptions = [], 
     preserveState = true,
     preserveScroll = true,
     additionalControls = null,
 }) => {
+    const { translations } = useContext(TranslationContext); 
+
     const form = useForm({
         search: initialFilters.search || "",
         sort_by: initialFilters.sort_by || "",
@@ -49,7 +51,6 @@ const SearchFilterBar = ({
     };
 
     const handleSort = (sortBy) => {
-        // Toggle sort order if clicking on the same column
         const newOrder =
             form.data.sort_by === sortBy && form.data.sort_order === "asc"
                 ? "desc"
@@ -92,9 +93,14 @@ const SearchFilterBar = ({
         });
     };
 
+    const getFilterPlaceholder = (label) => {
+        const template =
+            translations.select_filter_placeholder || "Select {label}"; 
+        return template.replace("{label}", label); 
+    };
+
     return (
         <div className="w-full mb-6 space-y-4">
-            {/* Separate form element just for search input */}
             <form
                 onSubmit={handleSearch}
                 className="flex flex-col sm:flex-row items-center gap-3"
@@ -103,7 +109,11 @@ const SearchFilterBar = ({
                     <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-400" />
                     <Input
                         type="text"
-                        placeholder={searchPlaceholder}
+                        placeholder={
+                            searchPlaceholder ||
+                            translations.search_placeholder_generic ||
+                            "Search..."
+                        } // <-- New key
                         value={form.data.search}
                         onChange={(e) => form.setData("search", e.target.value)}
                         className="pl-9"
@@ -113,7 +123,8 @@ const SearchFilterBar = ({
                         size="sm"
                         className="absolute right-1 top-1"
                     >
-                        Search
+                        {translations.search_button || "Search"}{" "}
+                        {/* <-- New key */}
                     </Button>
                 </div>
 
@@ -124,18 +135,20 @@ const SearchFilterBar = ({
                                 <Button
                                     variant="outline"
                                     className="flex items-center gap-1"
-                                    type="button" // Ensure this doesn't submit the form
+                                    type="button"
                                 >
                                     {form.data.sort_order === "asc" ? (
                                         <SortAsc size={16} />
                                     ) : (
                                         <SortDesc size={16} />
                                     )}
-                                    Sort
+                                    {translations.sort_button || "Sort"}{" "}
+                                    {/* <-- New key */}
                                     <ChevronDown size={16} />
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
+                                {/* sortOptions labels expected to be translated */}
                                 {sortOptions.map((option) => (
                                     <DropdownMenuItem
                                         key={option.value}
@@ -165,14 +178,17 @@ const SearchFilterBar = ({
                                 <Button
                                     variant="outline"
                                     className="flex items-center gap-1"
-                                    type="button" // Ensure this doesn't submit the form
+                                    type="button"
                                 >
                                     <Filter size={16} />
-                                    Filters
+                                    {translations.filters_button ||
+                                        "Filters"}{" "}
+                                    {/* <-- New key */}
                                     <ChevronDown size={16} />
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end" className="w-56">
+                                {/* filterOptions labels expected to be translated */}
                                 {filterOptions.map((filter) => (
                                     <div key={filter.name} className="p-2">
                                         <label className="text-sm font-medium mb-1 block">
@@ -191,13 +207,19 @@ const SearchFilterBar = ({
                                         >
                                             <SelectTrigger>
                                                 <SelectValue
-                                                    placeholder={`Select ${filter.label}`}
+                                                    // Use helper function for placeholder
+                                                    placeholder={getFilterPlaceholder(
+                                                        filter.label
+                                                    )}
                                                 />
                                             </SelectTrigger>
                                             <SelectContent>
                                                 <SelectItem value="all">
-                                                    All
+                                                    {translations.filter_all ||
+                                                        "All"}{" "}
+                                                    {/* <-- New key */}
                                                 </SelectItem>
+                                                {/* filter.options labels expected to be translated */}
                                                 {filter.options.map(
                                                     (option) => (
                                                         <SelectItem
@@ -218,16 +240,16 @@ const SearchFilterBar = ({
                                         size="sm"
                                         className="w-full"
                                         onClick={resetFilters}
-                                        type="button" // Ensure this doesn't submit the form
+                                        type="button"
                                     >
-                                        Reset Filters
+                                        {translations.reset_filters_button ||
+                                            "Reset Filters"}{" "}
+                                        {/* <-- New key */}
                                     </Button>
                                 </div>
                             </DropdownMenuContent>
                         </DropdownMenu>
                     )}
-
-                    {/* Place additional controls outside the form to prevent them from triggering form submission */}
                 </div>
             </form>
 

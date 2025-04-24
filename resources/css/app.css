@@ -1,7 +1,8 @@
+@import 'react-datepicker/dist/react-datepicker.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import 'react-datepicker/dist/react-datepicker.css';
 
 .stat-card {
   @apply bg-white p-6 rounded-lg shadow flex flex-col items-center;

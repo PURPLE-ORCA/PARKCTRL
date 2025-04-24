@@ -99,16 +99,6 @@ const ProductCreate = () => {
                                     {translations.create_product_inventory ||
                                         "Create a new product in the inventory"}
                                 </CardDescription>
-                                <Button variant="outline" size="sm" asChild>
-                                    <Link href={route("products.index")}>
-                                        <Icon
-                                            icon="solar:arrow-left-broken"
-                                            className="mr-2 h-4 w-4"
-                                        />
-                                        {translations.back_to_products ||
-                                            "Back to Products"}
-                                    </Link>
-                                </Button>
                             </div>
                         </div>
                     </CardHeader>

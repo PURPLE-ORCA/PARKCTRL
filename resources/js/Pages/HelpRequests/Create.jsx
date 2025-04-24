@@ -38,13 +38,12 @@ export default function Create({ auth, products }) {
         product_id: "",
         description: "",
     });
+    const is_admin = auth?.abilities?.is_admin;
 
     const handleSubmit = (e) => {
         e.preventDefault();
         post(route("help-requests.store"));
     };
-
-    // Removed handleExportPDF function from here
 
     return (
         <Layout
@@ -183,11 +182,19 @@ export default function Create({ auth, products }) {
                         <CardFooter className="flex justify-between border-t pt-6">
                             {/* Left Buttons */}
                             <div className="flex gap-2">
-                                <Button variant="outline" type="button" asChild>
-                                    <Link href={route("help-requests.index")}>
-                                        {translations.cancel || "Cancel"}
-                                    </Link>
-                                </Button>
+                                {is_admin && (
+                                    <Button
+                                        variant="outline"
+                                        type="button"
+                                        asChild
+                                    >
+                                        <Link
+                                            href={route("help-requests.index")}
+                                        >
+                                            {translations.cancel || "Cancel"}
+                                        </Link>
+                                    </Button>
+                                )}
                                 {/* Use the new Exporter Component */}
                                 <HelpRequestExporter
                                     formData={data}

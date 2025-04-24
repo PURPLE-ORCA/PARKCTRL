@@ -172,7 +172,7 @@ return (
             <div className="flex justify-between items-center mb-4">
                 <div className="flex gap-2 absolute right-96 top-28">
                     <ProductDataExport data={products.data} />
-                    <Link href={route("products.create")}>
+                    <Link className="" href={route("products.create")}>
                         <Button>
                             {translations.add_product || "Add Product"}
                         </Button>

@@ -81,16 +81,6 @@ const ServiceCreate = () => {
                                 {translations.create_new_service ||
                                     "Create New Service"}
                             </CardTitle>
-                            <Button variant="outline" size="sm" asChild>
-                                <Link href={route("services.index")}>
-                                    <Icon
-                                        icon="solar:arrow-left-broken"
-                                        className="mr-2 h-4 w-4"
-                                    />
-                                    {translations.back_to_services ||
-                                        "Back to Services"}
-                                </Link>
-                            </Button>
                         </div>
                     </CardHeader>
 
