@@ -131,7 +131,7 @@ export default function Dashboard({
                         </CardHeader>
                         <CardContent>
                             <div className="text-2xl font-bold">
-                                ${totalValue.toLocaleString()}
+                                {totalValue.toLocaleString()} MAD
                             </div>
                             <p className="text-xs text-muted-foreground">
                                 {translations.total_product_value ||
@@ -632,8 +632,13 @@ export default function Dashboard({
                                         {formatShowingTicketsText()}
                                     </div>
                                     <Button variant="outline">
-                                        {translations.view_all_tickets ||
-                                            "View All Tickets"}
+                                        <Link
+                                            href={route("help-requests.index")}
+                                            className="w-full"
+                                        >
+                                            {translations.view_all_tickets ||
+                                                "View All Tickets"}
+                                        </Link>
                                     </Button>
                                 </CardFooter>
                             </Card>

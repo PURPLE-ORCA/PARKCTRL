@@ -198,5 +198,6 @@
     "no_new_notifications": "لا توجد إشعارات جديدة.",
     "view_all_help_requests": "عرض كل طلبات المساعدة",
     "pending_role_assignment_title": "تنشيط الحساب معلق",
-    "pending_role_assignment_message": "حسابك في انتظار تحديد دور له من قبل المسؤول. يرجى المحاولة مرة أخرى لاحقًا."
+    "pending_role_assignment_message": "حسابك في انتظار تحديد دور له من قبل المسؤول. يرجى المحاولة مرة أخرى لاحقًا.",
+    "not_applicable": "N/A"
 }

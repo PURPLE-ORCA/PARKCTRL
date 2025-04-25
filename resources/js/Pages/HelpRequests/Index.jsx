@@ -145,7 +145,13 @@ export default function Index({ auth, helpRequests, currentFilter = "all" }) {
         {
             accessorKey: "product.name",
             header: translations.product || "Product",
-            cell: ({ row }) => <div>{row.original.product.name}</div>,
+            cell: ({ row }) => (
+                <div>
+                    {" "}
+                    {row.original.product?.name ??
+                        (translations.not_applicable || "N/A")}
+                </div>
+            ),
         },
         {
             accessorKey: "description",

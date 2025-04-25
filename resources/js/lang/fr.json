@@ -198,5 +198,6 @@
     "no_new_notifications": "Aucune nouvelle notification.",
     "view_all_help_requests": "Voir toutes les demandes d'aide",
     "pending_role_assignment_title": "Activation du compte en attente",
-    "pending_role_assignment_message": "Votre compte est en attente d'attribution de rôle par un administrateur. Veuillez revenir plus tard."
+    "pending_role_assignment_message": "Votre compte est en attente d'attribution de rôle par un administrateur. Veuillez revenir plus tard.",
+    "not_applicable": "N/A"
 }

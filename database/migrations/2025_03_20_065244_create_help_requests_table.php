@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('help_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('product_id')->constrained();
+            $table->foreignId('product_id')->nullable()->constrained();
             $table->text('description');
             $table->enum('status', ['pending', 'in_progress', 'resolved', 'closed'])->default('pending');
             $table->timestamps();
