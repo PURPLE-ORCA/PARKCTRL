@@ -1,7 +1,7 @@
 # Documentation Développeur
 
 ## Introduction
-FSJESStockManager est construit avec **Laravel, Inertia.js, React et PostgreSQL**. Ce guide fournit une vue d'ensemble de l'architecture, du schéma de base de données, des points de terminaison API et des stratégies de mise en cache.
+PARKCTRL est construit avec **Laravel, Inertia.js, React et PostgreSQL**. Ce guide fournit une vue d'ensemble de l'architecture, du schéma de base de données, des points de terminaison API et des stratégies de mise en cache.
 
 ## Stack Technologique
 - **Backend :** Laravel 12 (PHP 8.1+)
@@ -12,7 +12,7 @@ FSJESStockManager est construit avec **Laravel, Inertia.js, React et PostgreSQL*
 
 ## Structure du Projet
 ```
-FSJESStockManager/
+PARKCTRL/
 │── app/              # Logique backend Laravel
 │── database/         # Migrations et seeders
 │── resources/js/     # Composants frontend React
@@ -29,7 +29,6 @@ FSJESStockManager/
 - **services** (id, name, description, type, timestamps)
 - **products** (id, name, serial_number, supplier, price, timestamps)
 - **users** (id, name, email, email_verified_at, password, role_id, service_id, remember_token, timestamps)
-- **movements** (id, product_id, from_service_id, to_service_id, movement_date, user_id, note, timestamps)
 - **actions** (id, product_id, user_id, action, details, timestamps)
 - **notifications** (id, user_id, type, message, is_read, read_at, timestamps)
 - **help_requests** (id, user_id, product_id, description, status, timestamps)
@@ -50,11 +49,6 @@ FSJESStockManager/
 - `POST /services` → Créer un nouveau service
 - `PUT /services/{id}` → Mettre à jour un service
 - `DELETE /services/{id}` → Supprimer un service
-
-### Mouvements
-- `GET /movements` → Voir tous les mouvements
-- `POST /movements` → Enregistrer un mouvement
-- `GET /movements/export` → Exporter les données des mouvements
 
 ### Actions
 - `GET /actions` → Voir toutes les actions

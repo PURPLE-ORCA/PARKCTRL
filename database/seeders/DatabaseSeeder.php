@@ -4,11 +4,11 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Role;
-use App\Models\Service; // Make sure this is imported if you use the Model
+use App\Models\Service; 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Carbon\Carbon; // Needed for timestamps
+use Carbon\Carbon;
 
 class DatabaseSeeder extends Seeder
 {
@@ -70,7 +70,7 @@ class DatabaseSeeder extends Seeder
                 'service_id' => 4, // IT
                 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()
             ],
-            // Employees (add many more)
+            // Employees
             [
                 'name' => 'Jean Dupont',
                 'email' => 'jean.dupont@ctrl.com',
@@ -216,50 +216,53 @@ class DatabaseSeeder extends Seeder
         $adminItUserId = DB::table('users')->where('email', 'admin.it@ctrl.com')->value('id'); // Specific admin
         $employeeUserIds = DB::table('users')->where('role_id', $employeeRole->id)->pluck('id')->toArray();
 
+    function randomPastDate($start = '-2 years', $end = 'now') {
+        return Carbon::parse(fake()->dateTimeBetween($start, $end));
+    }
+            // --- Seed Products ---
+    $productsData = [
+        // IT Equipment
+        ['name' => 'Laptop Dell Latitude 7400', 'serial_number' => 'DELL-LAT7400-A1B2C3', 'supplier' => 'Dell Technologies', 'price' => 1450.00, 'served_to' => $employeeUserIds[0] ?? null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Laptop HP EliteBook 840', 'serial_number' => 'HP-ELT840-X9Y8Z7', 'supplier' => 'HP Inc.', 'price' => 1380.50, 'served_to' => $employeeUserIds[1] ?? null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Écran Dell 24" P2419H', 'serial_number' => 'MON-DELL-P2419H-001', 'supplier' => 'Dell Technologies', 'price' => 220.00, 'served_to' => $employeeUserIds[0] ?? null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Écran Dell 24" P2419H', 'serial_number' => 'MON-DELL-P2419H-002', 'supplier' => 'Dell Technologies', 'price' => 220.00, 'served_to' => $employeeUserIds[1] ?? null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Écran LG 27" UltraGear', 'serial_number' => 'MON-LG-UG27-LG950', 'supplier' => 'LG Electronics', 'price' => 450.99, 'served_to' => $employeeUserIds[2] ?? null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Clavier Logitech MX Keys', 'serial_number' => 'KB-LOGI-MXK-S001', 'supplier' => 'Logitech', 'price' => 119.90, 'served_to' => $employeeUserIds[0] ?? null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Clavier Logitech MX Keys', 'serial_number' => 'KB-LOGI-MXK-S002', 'supplier' => 'Logitech', 'price' => 119.90, 'served_to' => $employeeUserIds[1] ?? null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Souris Logitech MX Master 3S', 'serial_number' => 'MOU-LOGI-MXM3S-G01', 'supplier' => 'Logitech', 'price' => 109.90, 'served_to' => $employeeUserIds[0] ?? null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Souris Logitech MX Master 3S', 'serial_number' => 'MOU-LOGI-MXM3S-G02', 'supplier' => 'Logitech', 'price' => 109.90, 'served_to' => $employeeUserIds[1] ?? null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Imprimante HP LaserJet Pro M404dn', 'serial_number' => 'PRN-HP-M404DN-112233', 'supplier' => 'HP Inc.', 'price' => 350.00, 'served_to' => null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Serveur Dell PowerEdge R740', 'serial_number' => 'SRV-DELL-R740-ABCDEF', 'supplier' => 'Dell Technologies', 'price' => 8500.00, 'served_to' => null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Casque Jabra Evolve 65', 'serial_number' => 'HDST-JBR-EV65-001', 'supplier' => 'Jabra', 'price' => 180.00, 'served_to' => $employeeUserIds[3] ?? null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Webcam Logitech C922 Pro', 'serial_number' => 'WCAM-LOGI-C922-1A2B', 'supplier' => 'Logitech', 'price' => 99.99, 'served_to' => $employeeUserIds[3] ?? null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Switch Cisco Catalyst 2960', 'serial_number' => 'SW-CIS-C2960-XYZ123', 'supplier' => 'Cisco Systems', 'price' => 1200.00, 'served_to' => null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
 
-        // --- Seed Products ---
-        $productsData = [
-            // IT Equipment
-            ['name' => 'Laptop Dell Latitude 7400', 'serial_number' => 'DELL-LAT7400-A1B2C3', 'supplier' => 'Dell Technologies', 'price' => 1450.00, 'served_to' => $employeeUserIds[0] ?? null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()], // Jean Dupont
-            ['name' => 'Laptop HP EliteBook 840', 'serial_number' => 'HP-ELT840-X9Y8Z7', 'supplier' => 'HP Inc.', 'price' => 1380.50, 'served_to' => $employeeUserIds[1] ?? null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()], // Marie Curie
-            ['name' => 'Écran Dell 24" P2419H', 'serial_number' => 'MON-DELL-P2419H-001', 'supplier' => 'Dell Technologies', 'price' => 220.00, 'served_to' => $employeeUserIds[0] ?? null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()], // Jean Dupont
-            ['name' => 'Écran Dell 24" P2419H', 'serial_number' => 'MON-DELL-P2419H-002', 'supplier' => 'Dell Technologies', 'price' => 220.00, 'served_to' => $employeeUserIds[1] ?? null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()], // Marie Curie
-            ['name' => 'Écran LG 27" UltraGear', 'serial_number' => 'MON-LG-UG27-LG950', 'supplier' => 'LG Electronics', 'price' => 450.99, 'served_to' => $employeeUserIds[2] ?? null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()], // Pierre Martin (IT)
-            ['name' => 'Clavier Logitech MX Keys', 'serial_number' => 'KB-LOGI-MXK-S001', 'supplier' => 'Logitech', 'price' => 119.90, 'served_to' => $employeeUserIds[0] ?? null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Clavier Logitech MX Keys', 'serial_number' => 'KB-LOGI-MXK-S002', 'supplier' => 'Logitech', 'price' => 119.90, 'served_to' => $employeeUserIds[1] ?? null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Souris Logitech MX Master 3S', 'serial_number' => 'MOU-LOGI-MXM3S-G01', 'supplier' => 'Logitech', 'price' => 109.90, 'served_to' => $employeeUserIds[0] ?? null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Souris Logitech MX Master 3S', 'serial_number' => 'MOU-LOGI-MXM3S-G02', 'supplier' => 'Logitech', 'price' => 109.90, 'served_to' => $employeeUserIds[1] ?? null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Imprimante HP LaserJet Pro M404dn', 'serial_number' => 'PRN-HP-M404DN-112233', 'supplier' => 'HP Inc.', 'price' => 350.00, 'served_to' => null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()], // In stock / shared
-            ['name' => 'Serveur Dell PowerEdge R740', 'serial_number' => 'SRV-DELL-R740-ABCDEF', 'supplier' => 'Dell Technologies', 'price' => 8500.00, 'served_to' => null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()], // In IT room, not assigned to one person
-             ['name' => 'Casque Jabra Evolve 65', 'serial_number' => 'HDST-JBR-EV65-001', 'supplier' => 'Jabra', 'price' => 180.00, 'served_to' => $employeeUserIds[3] ?? null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()], // Sophie Dubois (Sales)
-             ['name' => 'Webcam Logitech C922 Pro', 'serial_number' => 'WCAM-LOGI-C922-1A2B', 'supplier' => 'Logitech', 'price' => 99.99, 'served_to' => $employeeUserIds[3] ?? null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()], // Sophie Dubois (Sales)
-             ['name' => 'Switch Cisco Catalyst 2960', 'serial_number' => 'SW-CIS-C2960-XYZ123', 'supplier' => 'Cisco Systems', 'price' => 1200.00, 'served_to' => null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()], // Network gear
+        // Office Furniture & Supplies
+        ['name' => 'Chaise de bureau ergonomique', 'serial_number' => 'CHR-ERG-BLK-001', 'supplier' => 'MobilierPro', 'price' => 280.00, 'served_to' => $employeeUserIds[0] ?? null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Chaise de bureau ergonomique', 'serial_number' => 'CHR-ERG-BLK-002', 'supplier' => 'MobilierPro', 'price' => 280.00, 'served_to' => $employeeUserIds[1] ?? null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Bureau Assis-Debout Électrique', 'serial_number' => 'DSK-STND-WHT-001', 'supplier' => 'OfficeDesign', 'price' => 550.00, 'served_to' => $employeeUserIds[2] ?? null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Table de réunion (8 pers.)', 'serial_number' => 'TBL-CONF-WOOD-L', 'supplier' => 'MobilierPro', 'price' => 950.00, 'served_to' => null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Tableau blanc magnétique 120x90', 'serial_number' => 'BRD-WHT-12090-01', 'supplier' => 'Papeterie Express', 'price' => 85.00, 'served_to' => null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Destructeur de documents Rexel', 'serial_number' => 'SHR-REX-AUTO100', 'supplier' => 'Bureau Vallée', 'price' => 199.99, 'served_to' => null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
 
-            // Office Furniture & Supplies
-            ['name' => 'Chaise de bureau ergonomique', 'serial_number' => 'CHR-ERG-BLK-001', 'supplier' => 'MobilierPro', 'price' => 280.00, 'served_to' => $employeeUserIds[0] ?? null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Chaise de bureau ergonomique', 'serial_number' => 'CHR-ERG-BLK-002', 'supplier' => 'MobilierPro', 'price' => 280.00, 'served_to' => $employeeUserIds[1] ?? null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Bureau Assis-Debout Électrique', 'serial_number' => 'DSK-STND-WHT-001', 'supplier' => 'OfficeDesign', 'price' => 550.00, 'served_to' => $employeeUserIds[2] ?? null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()], // Pierre Martin (IT)
-            ['name' => 'Table de réunion (8 pers.)', 'serial_number' => 'TBL-CONF-WOOD-L', 'supplier' => 'MobilierPro', 'price' => 950.00, 'served_to' => null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()], // Shared resource
-            ['name' => 'Tableau blanc magnétique 120x90', 'serial_number' => 'BRD-WHT-12090-01', 'supplier' => 'Papeterie Express', 'price' => 85.00, 'served_to' => null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()], // Shared
-            ['name' => 'Destructeur de documents Rexel', 'serial_number' => 'SHR-REX-AUTO100', 'supplier' => 'Bureau Vallée', 'price' => 199.99, 'served_to' => null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()], // Shared (maybe Finance or HR)
+        // Other Equipment
+        ['name' => 'Machine à café Nespresso Pro', 'serial_number' => 'COF-NES-ZENIUS-01', 'supplier' => 'Nespresso', 'price' => 450.00, 'served_to' => null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Aspirateur Pro Dyson V11', 'serial_number' => 'CLN-DYS-V11ABS-01', 'supplier' => 'Dyson SARL', 'price' => 599.00, 'served_to' => $employeeUserIds[8] ?? null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Chariot de nettoyage complet', 'serial_number' => 'CLN-CART-PRO-01', 'supplier' => 'HygiènePlus', 'price' => 180.00, 'served_to' => $employeeUserIds[8] ?? null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Talkie-Walkie Motorola T82 (paire)', 'serial_number' => 'COM-MOT-T82-P1', 'supplier' => 'Radiocom Pro', 'price' => 95.00, 'served_to' => $employeeUserIds[9] ?? null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Scanner de codes-barres Zebra DS2208', 'serial_number' => 'SCAN-ZEB-DS2208-01', 'supplier' => 'Logistique Solutions', 'price' => 150.00, 'served_to' => $employeeUserIds[4] ?? null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
 
-            // Other Equipment
-            ['name' => 'Machine à café Nespresso Pro', 'serial_number' => 'COF-NES-ZENIUS-01', 'supplier' => 'Nespresso', 'price' => 450.00, 'served_to' => null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()], // Shared
-            ['name' => 'Aspirateur Pro Dyson V11', 'serial_number' => 'CLN-DYS-V11ABS-01', 'supplier' => 'Dyson SARL', 'price' => 599.00, 'served_to' => $employeeUserIds[8] ?? null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()], // Employé Nettoyage 1
-            ['name' => 'Chariot de nettoyage complet', 'serial_number' => 'CLN-CART-PRO-01', 'supplier' => 'HygiènePlus', 'price' => 180.00, 'served_to' => $employeeUserIds[8] ?? null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()], // Employé Nettoyage 1
-            ['name' => 'Talkie-Walkie Motorola T82 (paire)', 'serial_number' => 'COM-MOT-T82-P1', 'supplier' => 'Radiocom Pro', 'price' => 95.00, 'served_to' => $employeeUserIds[9] ?? null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()], // Agent Sécurité Alpha
-            ['name' => 'Scanner de codes-barres Zebra DS2208', 'serial_number' => 'SCAN-ZEB-DS2208-01', 'supplier' => 'Logistique Solutions', 'price' => 150.00, 'served_to' => $employeeUserIds[4] ?? null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()], // Lucas Bernard (Logistique)
+        // Stock products
+        ['name' => 'Laptop Dell Latitude 7400', 'serial_number' => 'DELL-LAT7400-STOCK1', 'supplier' => 'Dell Technologies', 'price' => 1450.00, 'served_to' => null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Laptop Dell Latitude 7400', 'serial_number' => 'DELL-LAT7400-STOCK2', 'supplier' => 'Dell Technologies', 'price' => 1450.00, 'served_to' => null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Écran Dell 24" P2419H', 'serial_number' => 'MON-DELL-P2419H-STOCK1', 'supplier' => 'Dell Technologies', 'price' => 220.00, 'served_to' => null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Clavier Logitech MX Keys', 'serial_number' => 'KB-LOGI-MXK-STOCK1', 'supplier' => 'Logitech', 'price' => 119.90, 'served_to' => null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Souris Logitech MX Master 3S', 'serial_number' => 'MOU-LOGI-MXM3S-STOCK1', 'supplier' => 'Logitech', 'price' => 109.90, 'served_to' => null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+        ['name' => 'Chaise de bureau ergonomique', 'serial_number' => 'CHR-ERG-BLK-STOCK1', 'supplier' => 'MobilierPro', 'price' => 280.00, 'served_to' => null, 'created_at' => $createdAt = randomPastDate(), 'updated_at' => $createdAt->copy()->addDays(rand(0, 120))],
+    ];
 
-             // Products in stock (served_to = null)
-            ['name' => 'Laptop Dell Latitude 7400', 'serial_number' => 'DELL-LAT7400-STOCK1', 'supplier' => 'Dell Technologies', 'price' => 1450.00, 'served_to' => null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Laptop Dell Latitude 7400', 'serial_number' => 'DELL-LAT7400-STOCK2', 'supplier' => 'Dell Technologies', 'price' => 1450.00, 'served_to' => null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Écran Dell 24" P2419H', 'serial_number' => 'MON-DELL-P2419H-STOCK1', 'supplier' => 'Dell Technologies', 'price' => 220.00, 'served_to' => null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Clavier Logitech MX Keys', 'serial_number' => 'KB-LOGI-MXK-STOCK1', 'supplier' => 'Logitech', 'price' => 119.90, 'served_to' => null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Souris Logitech MX Master 3S', 'serial_number' => 'MOU-LOGI-MXM3S-STOCK1', 'supplier' => 'Logitech', 'price' => 109.90, 'served_to' => null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Chaise de bureau ergonomique', 'serial_number' => 'CHR-ERG-BLK-STOCK1', 'supplier' => 'MobilierPro', 'price' => 280.00, 'served_to' => null, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+    DB::table('products')->insert($productsData);
 
-        ];
-        DB::table('products')->insert($productsData);
         $productIds = DB::table('products')->pluck('id')->toArray();
         // Get specific product IDs for actions/notifications
         $laptopStock1Id = DB::table('products')->where('serial_number', 'DELL-LAT7400-STOCK1')->value('id');

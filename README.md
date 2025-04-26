@@ -1,19 +1,17 @@
-**DÉVELOPPÉ ET PROPULSÉ PAR EL MOUSSAOUI MOHAMMED**
 
-# Documentation de FSJESStockManager
+# Documentation de PARKCTRL
 
 ## Table des Matières
 
 - [Introduction](#introduction)
 - [Guide d'Installation](docs/installation-guide.md)
-- [Guide Utilisateur](docs/user-guide.md)
 - [Documentation Développeur](docs/developer-docs.md)
 
 ---
 
 ## Introduction
 
-FSJESStockManager est une application web de gestion des stocks développée avec Laravel, Inertia.js et React. Elle offre un contrôle d'accès basé sur les rôles, un suivi des stocks, des analyses, des notifications et un système de gestion des demandes d'assistance informatique.
+PARKCTRL est une application web de gestion des stocks développée avec Laravel, Inertia.js et React. Elle offre un contrôle d'accès basé sur les rôles, un suivi des stocks, des analyses, des notifications et un système de gestion des demandes d'assistance informatique.
 
 ### Fonctionnalités
 
@@ -22,7 +20,7 @@ FSJESStockManager est une application web de gestion des stocks développée ave
 - Suivi de la situation des produits
 - Gestion des demandes d'assistance
 - Exportation des données et des documents de demande
-- Rechargements partiels d’Inertia.js pour les notifications
+- Des notifications en temp reel
 
 ---
 
@@ -30,9 +28,6 @@ FSJESStockManager est une application web de gestion des stocks développée ave
 
 ### Guide d'Installation
 Consultez le [Guide d'Installation](docs/installation-guide.md) pour les instructions de configuration.
-
-### Guide Utilisateur
-Consultez le [Guide Utilisateur](docs/user-guide.md) pour des instructions détaillées sur l'utilisation de l'application.
 
 ### Documentation Développeur
 Consultez la [Documentation Développeur](docs/developer-docs.md) pour des détails techniques et la documentation API.

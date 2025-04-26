@@ -1,7 +1,7 @@
 # Guide d'Installation
 
 ## Prérequis
-Avant d'installer FSJESCTRL, assurez-vous d'avoir les éléments suivants installés :
+Avant d'installer [PARKCTRL], assurez-vous d'avoir les éléments suivants installés :
 
 - PHP 8.1+
 - Composer
@@ -11,8 +11,7 @@ Avant d'installer FSJESCTRL, assurez-vous d'avoir les éléments suivants instal
 
 ## Étape 1 : Cloner le Dépôt
 ```sh
-git clone https://github.com/PURPLE-ORCA/FSJESCTRL.git
-cd FSJESCTRL
+cd [PARKCTRL]
 ```
 
 ## Étape 2 : Installer les Dépendances
