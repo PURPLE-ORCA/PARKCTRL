@@ -30,7 +30,6 @@ import {
     AlertTriangle,
     Send,
 } from "lucide-react";
-import HelpRequestExporter from "./HelpRequestExporter";
 
 export default function Create({ auth, products }) {
     const { translations } = useContext(TranslationContext);
@@ -180,29 +179,6 @@ export default function Create({ auth, products }) {
 
                         {/* Footer with Buttons */}
                         <CardFooter className="flex justify-between border-t pt-6">
-                            {/* Left Buttons */}
-                            <div className="flex gap-2">
-                                {is_admin && (
-                                    <Button
-                                        variant="outline"
-                                        type="button"
-                                        asChild
-                                    >
-                                        <Link
-                                            href={route("help-requests.index")}
-                                        >
-                                            {translations.cancel || "Cancel"}
-                                        </Link>
-                                    </Button>
-                                )}
-                                {/* Use the new Exporter Component */}
-                                <HelpRequestExporter
-                                    formData={data}
-                                    user={auth.user}
-                                    products={products}
-                                    translations={translations}
-                                />
-                            </div>
 
                             {/* Submit Button */}
                             <Button

@@ -13,7 +13,6 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ThemeToggler from "@/Components/ThemeToggler";
-import NotificationBadge from "@/Components/NotificationBadge";
 import { TranslationContext } from "@/context/TranslationProvider";
 
 const Navbar = ({ pendingCount = 0 }) => {
@@ -60,7 +59,6 @@ const Navbar = ({ pendingCount = 0 }) => {
                               key: "all_help_requests",
                               route: "help-requests.index",
                           },
-                          { key: "actions_history", route: "actions.index" },
                           {
                               key: "request_help",
                               route: "help-requests.create",
@@ -252,9 +250,6 @@ const Navbar = ({ pendingCount = 0 }) => {
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         </div>
-                        {is_admin && (
-                            <NotificationBadge initialCount={pendingCount} />
-                        )}
                         {/* User Menu (Desktop) */}
                         <div className="hidden md:flex">
                             <DropdownMenu>

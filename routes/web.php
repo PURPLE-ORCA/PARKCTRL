@@ -50,10 +50,6 @@ Route::middleware('auth')->group(function () {
         Route::put('/services/{service}', [ServiceController::class, 'update'])->name('services.update'); 
         Route::get('/services/{service}/edit', [ServiceController::class, 'edit'])->name('services.edit');
         Route::delete('/services/{service}', [ServiceController::class, 'destroy'])->name('services.destroy');
-
-        Route::get('/actions', [ActionController::class, 'index'])->name('actions.index');
-        Route::get('/actions/create', [ActionController::class, 'create'])->name('actions.create');
-        Route::post('/actions', [ActionController::class, 'store'])->name('actions.store');
         
         Route::get('/help-requests', [HelpRequestController::class, 'index'])->name('help-requests.index');
         Route::put('/help-requests/{helpRequest}/status', [HelpRequestController::class, 'updateStatus'])->name('help-requests.update-status');

@@ -45,70 +45,6 @@ export default function Show({ auth, helpRequest }) {
         }
     };
 
-    // Helper to get status badge variant and icon
-    const getStatusAttributes = (status) => {
-        switch (status) {
-            case "pending":
-                return {
-                    variant: "warning",
-                    Icon: Clock,
-                    label: translations.pending || "Pending",
-                };
-            case "in_progress":
-                return {
-                    variant: "info",
-                    Icon: Wrench,
-                    label: translations.in_progress || "In Progress",
-                };
-            case "resolved":
-                return {
-                    variant: "success",
-                    Icon: CheckCircle,
-                    label: translations.resolved || "Resolved",
-                };
-            case "closed":
-                return {
-                    variant: "secondary",
-                    Icon: XCircle,
-                    label: translations.closed || "Closed",
-                }; 
-            default:
-                return {
-                    variant: "secondary",
-                    Icon: AlertCircle,
-                    label: status || "Unknown",
-                };
-        }
-    };
-    const statusAttributes = getStatusAttributes(helpRequest.status);
-
-    // Helper to get action icon - Now returns Icon component directly
-    const getActionIcon = (action) => {
-        switch (
-            action?.toLowerCase() // Add safe navigation
-        ) {
-            case "created":
-                return (
-                    <Package className="h-4 w-4 text-green-600 dark:text-green-500" />
-                );
-            case "updated":
-            case "status_changed": 
-                return (
-                    <Activity className="h-4 w-4 text-blue-600 dark:text-blue-500" />
-                );
-            case "resolved":
-                return (
-                    <CheckCircle className="h-4 w-4 text-purple-600 dark:text-purple-500" />
-                );
-            case "closed":
-                return (
-                    <XCircle className="h-4 w-4 text-gray-500 dark:text-gray-400" />
-                );
-            default:
-                return <Activity className="h-4 w-4 text-muted-foreground" />;
-        }
-    };
-
     const DetailItem = ({ icon: Icon, label, children }) => (
         <div className="flex items-start space-x-3">
             <Icon
@@ -163,13 +99,6 @@ export default function Show({ auth, helpRequest }) {
                                     {translations.help_request_information ||
                                         "Help Request Information"}
                                 </CardTitle>
-                                <Badge
-                                    variant={statusAttributes.variant}
-                                    className="capitalize px-3 py-1 text-sm whitespace-nowrap"
-                                >
-                                    <statusAttributes.Icon className="mr-1.5 h-4 w-4" />
-                                    {statusAttributes.label.replace("_", " ")}
-                                </Badge>
                             </div>
                             <CardDescription>
                                 {translations.details_about_support_request ||
@@ -264,80 +193,6 @@ export default function Show({ auth, helpRequest }) {
                             </div>
                         </CardContent>
                     </Card>
-
-                    {/* Action History Card */}
-                    {helpRequest.product?.action_logs && ( 
-                        <Card>
-                            <CardHeader>
-                                <CardTitle className="text-xl flex items-center">
-                                    <ClipboardList className="mr-2 h-5 w-5 text-primary" />
-                                    {translations.action_history ||
-                                        "Action History"}
-                                </CardTitle>
-                                <CardDescription>
-                                    {translations.timeline_of_actions ||
-                                        "Timeline of actions performed on this product"}
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                {helpRequest.product.action_logs.length > 0 ? (
-                                    <div className="relative space-y-4 max-h-96 overflow-y-auto p-1 -ml-1 scrollbar-thin scrollbar-thumb-muted-foreground/30 hover:scrollbar-thumb-muted-foreground/50 scrollbar-track-transparent">
-                                        {/* Timeline line */}
-                                        <div className="absolute left-[21px] top-0 bottom-0 w-0.5 bg-border -z-10"></div>
-
-                                        {helpRequest.product.action_logs.map(
-                                            (log) => (
-                                                <div
-                                                    key={log.id}
-                                                    className="flex items-start space-x-4 relative pl-1"
-                                                >
-                                                    {/* Timeline dot */}
-                                                    <div className="z-10 flex-shrink-0 mt-1.5 w-8 h-8 rounded-full bg-background flex items-center justify-center border-2 border-border">
-                                                        {getActionIcon(
-                                                            log.action
-                                                        )}
-                                                    </div>
-                                                    {/* Content */}
-                                                    <div className="flex-grow bg-card p-3 rounded-md border hover:border-primary/20 transition-colors">
-                                                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-1">
-                                                            <h4 className="font-semibold text-foreground text-sm capitalize">
-                                                                {log.action?.replace(
-                                                                    "_",
-                                                                    " "
-                                                                ) || "Action"}
-                                                            </h4>
-                                                            <span className="text-xs text-muted-foreground mt-1 sm:mt-0">
-                                                                {formatDate(
-                                                                    log.created_at
-                                                                )}{" "}
-                                                                by{" "}
-                                                                {log.user
-                                                                    ?.name ||
-                                                                    "System"}
-                                                            </span>
-                                                        </div>
-                                                        {log.details && ( // Only show details if they exist
-                                                            <p className="mt-1 text-sm text-muted-foreground">
-                                                                {log.details}
-                                                            </p>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                            )
-                                        )}
-                                    </div>
-                                ) : (
-                                    <div className="text-center py-12 border rounded-md bg-muted">
-                                        <ClipboardList className="mx-auto h-12 w-12 text-muted-foreground/50" />
-                                        <p className="mt-4 text-muted-foreground">
-                                            {translations.no_action_history ||
-                                                "No action history available for this product."}
-                                        </p>
-                                    </div>
-                                )}
-                            </CardContent>
-                        </Card>
-                    )}
                 </div>
             </div>
         </Layout>

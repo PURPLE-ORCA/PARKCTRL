@@ -38,11 +38,6 @@ import StayOut from "@/Components/StayOut";
 const UsersList = () => {
     const { auth, users, roles, services, filters } = usePage().props;
     const { translations } = useContext(TranslationContext);
-    const is_admin = auth?.abilities?.is_admin;
-
-        if (!is_admin) {
-            return <StayOut />;
-        }
 
     const form = useForm({
         search: filters.search || "",
@@ -165,56 +160,9 @@ const UsersList = () => {
     return (
         <Layout>
             <div className="p-6">
-                <h1 className="text-4xl font-bold mb-4">
+                <h1 className="text-4xl font-bold mb-6">
                     {translations.user_management || "User Management"}
                 </h1>
-                {/* Search and Sorting */}
-                <form
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                        form.get(route("users.index"), {
-                            preserveScroll: true,
-                            preserveState: true,
-                        });
-                    }}
-                    className="flex justify-between items-center mb-4"
-                >
-                    <Input
-                        type="text"
-                        placeholder={
-                            translations.search_placeholder ||
-                            "Search by name or email..."
-                        }
-                        value={form.data.search}
-                        onChange={(e) => form.setData("search", e.target.value)}
-                        className="max-w-sm"
-                    />
-                    <div className="flex gap-2">
-                        <Button
-                            onClick={() => {
-                                form.setData({
-                                    sort_by: "name",
-                                    sort_order: "asc",
-                                });
-                                form.submit();
-                            }}
-                        >
-                            {translations.sort_name_asc || "Sort by Name (Asc)"}
-                        </Button>
-                        <Button
-                            onClick={() => {
-                                form.setData({
-                                    sort_by: "email",
-                                    sort_order: "desc",
-                                });
-                                form.submit();
-                            }}
-                        >
-                            {translations.sort_email_desc ||
-                                "Sort by Email (Desc)"}
-                        </Button>
-                    </div>
-                </form>
 
                 {/* Table */}
                 <Table columns={columns} data={users.data} />

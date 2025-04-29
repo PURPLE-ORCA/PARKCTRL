@@ -103,7 +103,7 @@ class DatabaseSeeder extends Seeder
                 'service_id' => 5, // Marketing/Ventes
                 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()
             ],
-             [
+            [
                 'name' => 'Lucas Bernard',
                 'email' => 'lucas.bernard@ctrl.com',
                 'password' => Hash::make('password'),
